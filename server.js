@@ -455,7 +455,7 @@ const server = http.createServer(async (request, response) => {
   const filePath = path.resolve(root, `.${urlPath}`);
   if (!filePath.startsWith(root)) return sendJson(response, 403, { error: "Forbidden" });
   fs.readFile(filePath, (error, data) => {
-    if (error) { response.writeHead(404); return response.end("Not found"); }
+     if (error) {   console.error("Failed to serve:", filePath, error.code);   response.writeHead(404);   return response.end("Not found"); }
     const extension = path.extname(filePath).toLowerCase();
     const longCache = /\.(?:jpg|jpeg|png|webp|svg|ico)$/i.test(extension);
     response.writeHead(200, {
