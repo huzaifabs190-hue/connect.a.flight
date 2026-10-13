@@ -1,0 +1,12 @@
+frames-lossless/
+frames-webp/
+frames/
+models/
+.venv/
+node_modules/
+__pycache__/
+*.wav
+*.mp4
+*.zip
+.git/
+.agents/

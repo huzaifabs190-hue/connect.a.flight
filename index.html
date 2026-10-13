@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030303" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=4" />
+    <link rel="shortcut icon" href="favicon.svg?v=4" />
+    <meta name="description" content="Connect A Flight — thoughtfully planned journeys and unforgettable travel experiences." />
+    <title>Connect A Flight — Go Beyond</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" as="image" href="frames-hq/frame-001.jpg" fetchpriority="high" />
+  </head>
+  <body class="home-page" data-page="home">
+    <header class="site-header">
+      <a class="brand brand-lockup" href="#top" aria-label="Connect A Flight home"><img class="official-logo" src="assets/connect-a-flight-logo.png" alt="Connect A Flight" /></a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a class="active" href="index.html">Home</a><a href="flights.html">Flights</a><a href="tracker.html">Track</a><a href="destinations.html">Destinations</a><a href="about.html">About us</a>
+      </nav>
+      <a class="header-cta" href="flights.html"><span class="header-cta-copy"><small>Start your journey</small><strong>Book a flight</strong></span><span class="header-cta-arrow">↗</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span></button>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+        <a href="index.html">Home</a><a href="flights.html">Flights</a><a href="tracker.html">Track a flight</a><a href="destinations.html">Destinations</a><a href="about.html">About us</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="top" class="sequence" aria-label="A journey through the clouds">
+        <div class="sequence-sticky">
+          <canvas id="sequence-canvas" aria-label="Clouds seen from an airplane window"></canvas>
+          <div class="hero-shade"></div>
+          <div class="hero-content reveal">
+            <p class="eyebrow">Travel Beyond the Ordinary</p>
+            <h1>Experience the World<br /><em>Like Never Before</em></h1>
+            <p class="hero-copy">From iconic landmarks to hidden escapes and unforgettable moments, we create journeys that feel effortless and memorable.</p>
+            <a class="button button-primary" href="destinations.html">Explore tours <span>↗</span></a>
+          </div>
+          <div class="hero-feature-grid">
+            <article class="hero-feature">
+              <span class="hero-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.2 2.3 3.3 5 3.3 8S14.2 17.7 12 20c-2.2-2.3-3.3-5-3.3-8S9.8 6.3 12 4m5.5 2.5 2-2m-2 0h2v2"/></svg></span>
+              <div><h3>Journeys Across the World</h3><p>Discover unforgettable destinations, beautiful landscapes, and carefully planned experiences for every traveler.</p></div>
+            </article>
+            <article class="hero-feature">
+              <span class="hero-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8h12v11H6zM9 8V6.5A2.5 2.5 0 0 1 11.5 4h1A2.5 2.5 0 0 1 15 6.5V8M9 12l2 2 4-4"/></svg></span>
+              <div><h3>Travel Without the Stress</h3><p>From flights and stays to activities and support, we handle every detail so you can enjoy the journey.</p></div>
+            </article>
+          </div>
+          <p class="scroll-cue">Scroll to take off <span>↓</span></p>
+        </div>
+      </section>
+
+      <section id="book-flight" class="section flight-booking-section home-duplicate-section" hidden>
+        <div class="booking-heading reveal"><p class="eyebrow">Search. Compare. Fly.</p><h2>Find Your<br /><em>Perfect Flight</em></h2><p>Search routes, compare sample fares, and prepare your trip in one place.</p></div>
+        <form id="flight-search-form" class="flight-search-card reveal">
+          <div class="trip-toggle" role="group" aria-label="Trip type"><button class="selected" type="button" data-trip="round">Round trip</button><button type="button" data-trip="oneway">One way</button></div>
+          <div class="flight-fields">
+            <label><span>From</span><input id="flight-from" name="from" list="airport-list" placeholder="Lahore (LHE)" required /></label>
+            <button class="swap-airports" type="button" aria-label="Swap airports">⇄</button>
+            <label><span>To</span><input id="flight-to" name="to" list="airport-list" placeholder="Karachi (KHI)" required /></label>
+            <label><span>Departure</span><input id="flight-departure" name="departure" type="date" required /></label>
+            <label id="return-field"><span>Return</span><input id="flight-return" name="return" type="date" required /></label>
+            <label><span>Travellers</span><select id="flight-travellers" name="travellers"><option>1 Traveller</option><option>2 Travellers</option><option>3 Travellers</option><option>4 Travellers</option><option>5 Travellers</option><option>6 Travellers</option><option>7 Travellers</option><option>8 Travellers</option><option>9 Travellers</option></select></label>
+            <label><span>Cabin</span><select id="flight-cabin" name="cabin"><option>Economy</option><option>Business</option></select></label>
+          </div>
+          <datalist id="airport-list"><option value="Lahore (LHE)"></option><option value="Karachi (KHI)"></option><option value="Islamabad (ISB)"></option><option value="Dubai (DXB)"></option><option value="London Heathrow (LHR)"></option><option value="Doha (DOH)"></option><option value="Istanbul (IST)"></option></datalist>
+          <button class="flight-search-button" type="submit">Search flights <span>↗</span></button>
+        </form>
+        <div id="flight-results" class="flight-results" aria-live="polite"></div>
+      </section>
+
+      <section id="track-flight" class="section flight-tracker-section home-duplicate-section" hidden>
+        <div class="tracker-heading reveal">
+          <div>
+            <p class="eyebrow">Live Airspace Intelligence</p>
+            <h2>Track Flights<br /><em>Across the Sky</em></h2>
+          </div>
+          <p class="section-copy">Enter a callsign to locate an aircraft, or explore live traffic around Pakistan on our radar-style map.</p>
+        </div>
+
+        <div class="tracker-shell reveal">
+          <aside class="tracker-control-panel">
+            <div class="tracker-live-row"><span class="tracker-live-dot"></span><strong>Live radar</strong><small id="tracker-updated">Connecting…</small></div>
+            <form id="flight-tracker-form" class="tracker-search">
+              <label for="tracker-callsign">Flight callsign</label>
+              <div><input id="tracker-callsign" name="callsign" autocomplete="off" maxlength="12" placeholder="PIA761" aria-describedby="tracker-search-help" /><button type="submit" aria-label="Track flight">Track <span>↗</span></button></div>
+              <small id="tracker-search-help">Try PIA761, UAE602, QTR620, or leave blank for nearby traffic.</small>
+            </form>
+            <div class="tracker-quick" aria-label="Example flight callsigns"><button type="button" data-callsign="PIA761">PIA761</button><button type="button" data-callsign="UAE602">UAE602</button><button type="button" data-callsign="QTR620">QTR620</button></div>
+            <div id="tracker-selected" class="tracker-selected" aria-live="polite">
+              <p>Select an aircraft on the radar</p>
+              <h3>Airspace overview</h3>
+              <div class="tracker-stats"><span><small>Altitude</small><strong>—</strong></span><span><small>Speed</small><strong>—</strong></span><span><small>Heading</small><strong>—</strong></span><span><small>Country</small><strong>—</strong></span></div>
+            </div>
+            <p class="tracker-disclaimer">Live positions are derived from ADS-B signals. Coverage and update times vary by aircraft and location.</p>
+          </aside>
+
+          <div class="tracker-map-wrap">
+            <div id="flight-radar-map" aria-label="Interactive live flight radar map"></div>
+            <div class="radar-sweep" aria-hidden="true"></div>
+            <div class="radar-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="tracker-map-topbar"><span id="tracker-source">Connecting to live airspace…</span><button id="tracker-refresh" type="button">Refresh radar</button></div>
+            <div id="tracker-loading" class="tracker-loading"><span></span><p>Scanning the sky</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="intro" class="section intro-section">
+        <div class="orb orb-one"></div>
+        <div class="section-heading centered reveal">
+          <p class="eyebrow">Explore the World Without Limits</p>
+          <h2>Your Journey Begins<br /><em>Beyond the Horizon</em></h2>
+          <p class="section-copy">Discover unforgettable destinations, carefully planned journeys, and seamless travel experiences designed around you. From peaceful mountain escapes to vibrant cities, we make exploring the world simple.</p>
+          <div class="button-row"><a class="button button-primary" href="#destinations">Explore Destinations <span>↗</span></a><a class="button button-secondary" href="#plan">Plan Your Journey</a></div>
+        </div>
+        <div class="trusted reveal">
+          <p>Trusted travel partners</p>
+          <div class="logo-row" aria-label="Travel partner brands"><span>Emirates</span><span>QATAR AIRWAYS</span><span>Turkish Airlines</span><span>ETIHAD</span><span>Singapore Airlines</span></div>
+        </div>
+      </section>
+
+      <section id="destinations" class="section">
+        <div class="section-heading split reveal"><div><p class="eyebrow">Places Worth Discovering</p><h2>See More of<br /><em>the World</em></h2></div><p class="section-copy">Travel beyond the ordinary with handpicked destinations offering breathtaking landscapes, rich cultures, and experiences you will remember forever.</p></div>
+        <div class="destination-grid">
+          <article class="destination-card paris reveal"><span class="destination-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 8 20M12 3l4 17M6 20h12M9 14h6M10 9h4"/></svg></span><span class="card-number">01</span><div><p>France</p><h3>Paris</h3><p>Romantic streets, iconic landmarks, timeless architecture, and unforgettable evenings beneath the city lights.</p></div></article>
+          <article class="destination-card alps reveal"><span class="destination-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 19 6-10 3 5 2-3 7 8M7 12l2 2 2-2"/></svg></span><span class="card-number">02</span><div><p>Switzerland</p><h3>Swiss Alps</h3><p>Snow-covered peaks, peaceful valleys, scenic train journeys, and extraordinary alpine adventures.</p></div></article>
+          <article class="destination-card bali reveal"><span class="destination-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M12 2v2M5 9H3m18 0h-2M6.5 3.5 8 5m9.5-1.5L16 5M4 20c3-4 6-4 8 0 2-4 5-4 8 0"/></svg></span><span class="card-number">03</span><div><p>Indonesia</p><h3>Bali</h3><p>Tropical beaches, beautiful temples, green landscapes, and relaxing island experiences.</p></div></article>
+          <article class="destination-card dubai reveal"><span class="destination-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21V10h5v11M15 21V6h5v15M9 21V3h6v18M11 7h2m-2 4h2m-2 4h2m6-5h-2m2 4h-2"/></svg></span><span class="card-number">04</span><div><p>United Arab Emirates</p><h3>Dubai</h3><p>Modern luxury, desert adventures, world-class attractions, and unforgettable city views.</p></div></article>
+        </div>
+        <div class="center-action"><a class="button button-secondary" href="#plan">View All Destinations <span>↗</span></a></div>
+      </section>
+
+      <section id="experiences" class="section experiences-section">
+        <div class="section-heading centered reveal"><p class="eyebrow">Travel Your Way</p><h2>Experiences Made for<br /><em>Every Journey</em></h2><p class="section-copy">Whether you are searching for adventure, relaxation, culture, or luxury, we create travel experiences that match your interests and travel style.</p></div>
+        <div class="experience-grid">
+          <article class="info-card reveal"><span>↗</span><p>01 / Adventure</p><h3>Adventure Escapes</h3><p>Explore mountains, forests, deserts, and coastlines through exciting outdoor journeys.</p></article>
+          <article class="info-card reveal"><span>✦</span><p>02 / Luxury</p><h3>Luxury Retreats</h3><p>Stay at exceptional resorts and enjoy premium experiences with every detail handled.</p></article>
+          <article class="info-card reveal"><span>◎</span><p>03 / Culture</p><h3>Cultural Journeys</h3><p>Connect with local traditions, historic places, authentic food, and inspiring communities.</p></article>
+          <article class="info-card reveal"><span>♡</span><p>04 / Romance</p><h3>Romantic Getaways</h3><p>Celebrate meaningful moments in beautiful destinations designed for two.</p></article>
+        </div>
+      </section>
+
+      <section id="why-us" class="section why-section home-duplicate-section" hidden>
+        <div class="why-intro reveal"><p class="eyebrow">Designed Around You</p><h2>Travel Made<br /><em>Effortless</em></h2><p class="section-copy">From your first idea to your journey home, our travel specialists manage every detail so you can focus on enjoying the experience.</p><a class="button button-primary" href="#plan">Why Choose Us <span>↗</span></a></div>
+        <div class="feature-list">
+          <article class="feature reveal"><span>01</span><div><h3>Personalized Planning</h3><p>Every itinerary is created around your budget, schedule, interests, and preferred travel style.</p></div></article>
+          <article class="feature reveal"><span>02</span><div><h3>Worldwide Destinations</h3><p>Explore carefully selected destinations, accommodations, activities, and hidden gems across the globe.</p></div></article>
+          <article class="feature reveal"><span>03</span><div><h3>Trusted Travel Support</h3><p>Receive reliable assistance before, during, and after your journey whenever you need it.</p></div></article>
+          <article class="feature reveal"><span>04</span><div><h3>Seamless Booking</h3><p>Flights, hotels, transportation, and experiences are organized in one convenient place.</p></div></article>
+        </div>
+      </section>
+
+      <section id="plan" class="section cta-section">
+        <div class="cta-inner reveal"><p class="eyebrow">The World Is Waiting</p><h2>Where Will Your Next<br /><em>Journey Take You?</em></h2><p class="section-copy">Tell us where you want to go, and we will turn your travel ideas into a thoughtfully planned experience filled with unforgettable moments.</p><div class="button-row"><a class="button button-primary" href="mailto:hello@connectaflight.com">Start Planning <span>↗</span></a><a class="button button-secondary" href="tel:+10000000000">Speak With a Travel Expert</a></div><p class="supporting">Personalized itineraries <i></i> Worldwide destinations <i></i> Dedicated travel support</p></div>
+      </section>
+    </main>
+
+    <footer><a class="footer-wordmark" href="#top" aria-label="Back to top"><span>Connect</span><em>A</em><span>Flight</span></a><p class="footer-tagline">Go further. <em>Feel more.</em></p><p class="footer-copy">© 2026 Connect A Flight</p></footer>
+    <aside class="voice-assistant" aria-label="Roman Urdu travel assistant">
+      <button class="voice-launcher" type="button" aria-expanded="false" aria-controls="voice-panel" aria-label="Open Roman Urdu voice assistant">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4Z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v3m-3 0h6"/></svg>
+        <span class="voice-pulse"></span>
+      </button>
+      <section id="voice-panel" class="voice-panel" aria-hidden="true">
+        <header class="voice-panel-header"><div class="voice-identity"><span class="voice-header-logo"><img src="favicon.svg" alt="" aria-hidden="true" /></span><div><p>Connect A Flight <i>Live</i></p><h2>Roman Urdu <em>Assistant</em></h2></div></div><button class="voice-close" type="button" aria-label="Close assistant">×</button></header>
+        <div class="voice-conversation" aria-live="polite">
+          <div class="voice-message assistant"><span class="voice-avatar"><img src="favicon.svg" alt="" aria-hidden="true" /></span><p>Assalam-o-alaikum! Aap apni travel planning ke baare mein Urdu mein pooch sakte hain.</p></div>
+        </div>
+        <p class="voice-status">Mic dabayein aur Urdu mein bolain</p>
+        <div class="voice-controls"><button class="voice-mic" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4Z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v3m-3 0h6"/></svg><span>Bolain</span></button><button class="voice-stop" type="button" aria-label="Stop speaking"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1"/></svg></button></div>
+        <p class="voice-disclosure">Faster-Whisper + Kokoro female voice, fully local.</p>
+      </section>
+    </aside>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="script.js"></script>
+  </body>
+</html>

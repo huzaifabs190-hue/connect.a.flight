@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030303" />
+    <meta name="description" content="Track live aircraft positions with Connect A Flight radar." />
+    <title>Live Flight Tracker — Connect A Flight</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="inner-page tracker-page" data-page="tracker">
+    <div id="site-header-slot"></div>
+    <main>
+      <section id="track-flight" class="section flight-tracker-section standalone-tracker">
+        <div class="tracker-heading reveal visible">
+          <div><p class="eyebrow">Live Airspace Intelligence</p><h1>Track Flights<br /><em>Across the Sky</em></h1></div>
+          <p class="section-copy">Enter a callsign to locate an aircraft anywhere in the world, or pan and zoom the map to load real live traffic in the visible airspace.</p>
+        </div>
+        <div class="tracker-shell reveal visible">
+          <aside class="tracker-control-panel">
+            <div class="tracker-live-row"><span class="tracker-live-dot"></span><strong>Live radar</strong><small id="tracker-updated">Connecting…</small></div>
+            <form id="flight-tracker-form" class="tracker-search">
+              <label for="tracker-callsign">Flight callsign</label>
+              <div><input id="tracker-callsign" name="callsign" autocomplete="off" maxlength="12" placeholder="PIA761" aria-describedby="tracker-search-help" /><button type="submit" aria-label="Track flight">Track <span>↗</span></button></div>
+              <small id="tracker-search-help">Try PIA761, UAE602, QTR620, or leave blank for nearby traffic.</small>
+            </form>
+            <div class="tracker-quick" aria-label="Example flight callsigns"><button type="button" data-callsign="PIA761">PIA761</button><button type="button" data-callsign="UAE602">UAE602</button><button type="button" data-callsign="QTR620">QTR620</button></div>
+            <div id="tracker-selected" class="tracker-selected" aria-live="polite"><p>Select an aircraft on the radar</p><h3>Airspace overview</h3><div class="tracker-stats"><span><small>Altitude</small><strong>—</strong></span><span><small>Speed</small><strong>—</strong></span><span><small>Heading</small><strong>—</strong></span><span><small>Country</small><strong>—</strong></span></div></div>
+            <p class="tracker-disclaimer">Live positions are derived from ADS-B signals. Coverage and update times vary by aircraft and location.</p>
+          </aside>
+          <div class="tracker-map-wrap">
+            <div id="flight-radar-map" aria-label="Interactive live flight radar map"></div>
+            <div class="radar-sweep" aria-hidden="true"></div><div class="radar-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="tracker-map-topbar"><span id="tracker-source">Connecting to live airspace…</span><button id="tracker-refresh" type="button">Refresh radar</button></div>
+            <div id="tracker-loading" class="tracker-loading active"><span></span><p>Scanning the sky</p></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer-slot"></div>
+    <div id="voice-assistant-slot"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="page-shell.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
